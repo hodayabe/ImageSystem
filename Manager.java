@@ -1,4 +1,8 @@
+import java.io.BufferedReader;
 import java.io.Console;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Vector;
@@ -20,33 +24,79 @@ public class Manager {
 	/*SD=Standard Deviation*/
 	public static void main(String[] args) 
 	{
-
 //		/*Simulation - IOT*/
 //		/*Simulating sensor by plotting random values 
 //		 between the minimum and maximum values*/
-//       
-//		Sensor [][] sensors=new Sensor[25][40]; 
-//		for(int i=0;i<sensors.length;i++)
-//		{
-//			for(int j=0;j<sensors[i].length;j++)
-//			{	
-//			double rand_temperature =minTemperature + (maxTemperature-minTemperature) *rn.nextDouble() ;
-//			double rand_amountOfRain = minAmountOfRain + (maxAmountOfRain-minAmountOfRain) *rn.nextDouble();
-//			double rand_windSpeed = minWindSpeed + (maxWindSpeed-minWindSpeed) *rn.nextDouble();
-//			double rand_windDirection= minWindDirection + (maxWindDirection-minWindDirection)*rn.nextDouble();
-//			double rand_nearGroundTemperature = minNearGroundTemperature+ (maxNearGroundTemperature-minNearGroundTemperature) *rn.nextDouble();
-//			double rand_relativeHumidity = minRelativeHumidity+(maxRelativeHumidity-minRelativeHumidity) *rn.nextDouble();
-//			double rand_topGustSpeed = minRelativeHumidity+(maxTopGustSpeed-minTopGustSpeed) *rn.nextDouble();
-//			double rand_atmosphericPressure = minAtmosphericPressure +(maxAtmosphericPressure-minAtmosphericPressure) *rn.nextDouble();
-//			double rand_upperWindDirection = minUpperWindDirection+(maxUpperWindDirection-minUpperWindDirection) *rn.nextDouble();
-//			double rand_globalRadiation = minGlobalRadiation +(maxGlobalRadiation-minGlobalRadiation) *rn.nextDouble();
-//   
-//			sensors[i][j] =new Sensor(rand_temperature,rand_amountOfRain,rand_windSpeed,rand_windDirection,rand_nearGroundTemperature,
-//					rand_relativeHumidity,rand_topGustSpeed,rand_atmosphericPressure,rand_upperWindDirection,rand_globalRadiation);
-//			}
-//		}
+
  InitializationSensor is=new InitializationSensor();
  is.getMatrix();
+  
+ String hostName = args[0];
+ int portNumber = Integer.parseInt(args[1]);
+ 
+ 
+ 
+ 
+
+/*public class GreetServer {
+    private ServerSocket serverSocket;
+    private Socket clientSocket;
+    private PrintWriter out;
+    private BufferedReader in;
+ 
+    public void start(int port) {
+        serverSocket = new ServerSocket(port);
+        clientSocket = serverSocket.accept();
+        out = new PrintWriter(clientSocket.getOutputStream(), true);
+        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        String greeting = in.readLine();
+            if ("hello server".equals(greeting)) {
+                out.println("hello client");
+            }
+            else {
+                out.println("unrecognised greeting");
+            }
+    }
+ 
+    public void stop() {
+        in.close();
+        out.close();
+        clientSocket.close();
+        serverSocket.close();
+    }
+    public static void main(String[] args) {
+        GreetServer server=new GreetServer();
+        server.start(6666);
+    }
+}
+*/
+
+
+ 
+    String msg;  
+ try {
+     Socket echoSocket = new Socket(hostName, portNumber);
+     PrintWriter out =
+         new PrintWriter(echoSocket.getOutputStream(), true);
+     BufferedReader in =
+         new BufferedReader(
+             new InputStreamReader(echoSocket.getInputStream()));
+     /*BufferedReader stdIn =
+         new BufferedReader(
+             new InputStreamReader(System.in))*/
+     
+     //out.println(msg);
+     String resp = in.readLine();
+     
+ }
+ catch(Exception e)
+ {
+	 System.out.println("Error---Socket Faild");
+ }
+ 
+
+
+ 
 	}
 
 }
