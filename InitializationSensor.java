@@ -7,6 +7,7 @@ public class InitializationSensor {
 	Random rn = new Random();
 	
 	Sensor [][] sensors=new Sensor[25][40];
+	int counter=0;
 	
 	double minTemperature=-5.0;
 	double maxTemperature=18.3;
@@ -269,7 +270,8 @@ public class InitializationSensor {
 			double rand_globalRadiation = minGlobalRadiation +(maxGlobalRadiation-minGlobalRadiation) *rn.nextDouble();
    
 			sensors[i][j] =new Sensor(rand_temperature,rand_amountOfRain,rand_windSpeed,rand_windDirection,rand_nearGroundTemperature,
-					rand_relativeHumidity,rand_topGustSpeed,rand_atmosphericPressure,rand_upperWindDirection,rand_globalRadiation,i,j);
+					rand_relativeHumidity,rand_topGustSpeed,rand_atmosphericPressure,rand_upperWindDirection,rand_globalRadiation,i,j,counter);
+			counter++;
 			}
 		}
 	}
@@ -277,5 +279,17 @@ public class InitializationSensor {
 	{
 		return sensors;
 	}
+	public String ToString()
+	{
+		String res= this.minTemperature + "," + this.maxTemperature + "," + this.minAmountOfRain + ","
+				  +this.maxAmountOfRain + "," + this.minWindSpeed + "," + this.maxWindSpeed + ","
+				  + this.minWindDirection + "," + this.maxWindDirection + "," + this.minNearGroundTemperature
+				  + "," + this.maxNearGroundTemperature + "," + this.minRelativeHumidity + "," + this.maxRelativeHumidity
+				  +","+ this.minTopGustSpeed + "," + this.maxTopGustSpeed + ","+ this.minAtmosphericPressure +","
+				  + this.maxAtmosphericPressure + ","+this.minUpperWindDirection + "," + this.maxUpperWindDirection
+				  +","+this.minGlobalRadiation +","+this.maxGlobalRadiation;
+		return res;
+	}
+	
 
 }

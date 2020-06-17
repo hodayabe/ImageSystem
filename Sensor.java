@@ -4,7 +4,6 @@ import java.lang.reflect.Constructor;
   * attached to each tree in the field 
   * and models its different values */
 
-/*flaout*/
 
 public class Sensor {
     private double temperature; //טמפרטורה
@@ -17,8 +16,9 @@ public class Sensor {
     private double AtmosphericPressure;//לחץ אטמוספרי
     private double UpperWindDirection;//כיוון משב עליון
     private double GlobalRadiation;//קרינה גלובלית
-    private int indexI;
-    private int indexJ;
+    private int indexI; //אינקדס שורה
+    private int indexJ; //אינדקס עמודה
+    private int number; //מספר סנסור
     
     /*empty constructor*/
     public Sensor()
@@ -33,14 +33,14 @@ public class Sensor {
     	this.AtmosphericPressure=0;
     	this.UpperWindDirection=0;
     	this.GlobalRadiation=0;
-    	this.setIndexI(0);
-    	this.setIndexJ(0);
+		this.indexI=0;
+		this.indexJ=0;
     }
     
     /*constructor*/
     public Sensor(double temperature,double AmountOfRain,double windSpeed,double WindDirection,double NearGroundTemperature,
     		double RelativeHumidity,double TopGustSpeed,double AtmosphericPressure,double UpperWindDirection,double GlobalRadiation
-    		,int indexI,int indexJ)
+    		,int indexI,int indexJ,int number)
     {
     	this.temperature=temperature;
     	this.AmountOfRain=AmountOfRain;
@@ -52,8 +52,9 @@ public class Sensor {
     	this.AtmosphericPressure=AtmosphericPressure;
     	this.UpperWindDirection=UpperWindDirection;
     	this.GlobalRadiation=GlobalRadiation;
-    	this.setIndexI(indexI);
-    	this.setIndexJ(indexJ);
+    	this.indexI=indexI;
+    	this.indexJ=indexJ;
+    	this.number=number;
     }
     
     /*Getters and Setters*/
@@ -153,6 +154,14 @@ public class Sensor {
 	public void setIndexJ(int indexJ) {
 		this.indexJ = indexJ;
 	}
-    
+	
+    public String ToString()
+    {
+    	String res=this.temperature + "," + this.AmountOfRain + "," + this.windSpeed + "," + this.WindDirection
+    			   + "," + this.NearGroundTemperature + "," + this.RelativeHumidity + "," + this.TopGustSpeed
+    			   + "," + this.AtmosphericPressure + "," + this.UpperWindDirection + "," + this.GlobalRadiation
+    			   + "," + this.indexI + "," + this.indexJ + "," + this.number;
+    	return res;
+    }
 	
 }

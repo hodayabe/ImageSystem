@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.Console;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Random;
 import java.util.Scanner;
@@ -27,76 +28,41 @@ public class Manager {
 //		/*Simulation - IOT*/
 //		/*Simulating sensor by plotting random values 
 //		 between the minimum and maximum values*/
-
+ Sensor [][] sen = new Sensor[25][40];
  InitializationSensor is=new InitializationSensor();
- is.getMatrix();
+ sen=is.getMatrix();
   
  String hostName = args[0];
  int portNumber = Integer.parseInt(args[1]);
  
  
- 
- 
 
-/*public class GreetServer {
-    private ServerSocket serverSocket;
-    private Socket clientSocket;
-    private PrintWriter out;
-    private BufferedReader in;
- 
-    public void start(int port) {
-        serverSocket = new ServerSocket(port);
-        clientSocket = serverSocket.accept();
-        out = new PrintWriter(clientSocket.getOutputStream(), true);
-        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-        String greeting = in.readLine();
-            if ("hello server".equals(greeting)) {
-                out.println("hello client");
-            }
-            else {
-                out.println("unrecognised greeting");
-            }
-    }
- 
-    public void stop() {
-        in.close();
-        out.close();
-        clientSocket.close();
-        serverSocket.close();
-    }
-    public static void main(String[] args) {
-        GreetServer server=new GreetServer();
-        server.start(6666);
-    }
-}
-*/
+	    try{
+	        ServerSocket clientSocket = new ServerSocket(portNumber);
+	        Socket socket = clientSocket.accept();
+	        PrintWriter printWriter = new PrintWriter(socket.getOutputStream());
+	        printWriter.write("Hello user!\n");
+	        printWriter.write(is.ToString());
+	        printWriter.flush();
+	        printWriter.close();
+	        socket.close();
+	        clientSocket.close();
+	    }catch(IOException e){}
+	
 
 
- 
-    String msg;  
- try {
-     Socket echoSocket = new Socket(hostName, portNumber);
-     PrintWriter out =
-         new PrintWriter(echoSocket.getOutputStream(), true);
-     BufferedReader in =
-         new BufferedReader(
-             new InputStreamReader(echoSocket.getInputStream()));
-     /*BufferedReader stdIn =
-         new BufferedReader(
-             new InputStreamReader(System.in))*/
-     
-     //out.println(msg);
-     String resp = in.readLine();
-     
- }
- catch(Exception e)
- {
-	 System.out.println("Error---Socket Faild");
- }
- 
+//
+//	     System.out.println("Server waiting for client 1");
+//	     Socket client1 = accept();
+	     PrintWriter writer = new PrintWriter(client1.getOutputStream(), true);
+	     writer.write("Hello user 1");
 
+	     System.out.println("Server waiting for client 2");
+	     Socket client2 = accept();
+	     PrintWriter writer2 = new PrintWriter(client2.getOutputStream(), true);
+	     writer2.write("Hello user 2");
 
- 
-	}
+	     System.out.println("Clients connected");
+
 
 }
